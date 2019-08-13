@@ -9,8 +9,14 @@ class Portal:
         self.showHomePage()
 
     def displayStocks(self):
-        for stocks in self.stocks:
-            print(stocks)
+        for stock in self.stocks:
+            buy = input("Enter y to buy this stock")
+
+            if buy == "y":
+                self.user.buy(stock)
+
+
+
     def showHomePage(self):
         activity = input("What would you like to do?\n"
                          "1.View stocks and buy them."
