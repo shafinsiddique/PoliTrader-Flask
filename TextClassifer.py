@@ -13,13 +13,16 @@ from sklearn.metrics import accuracy_score
 
 np.random.seed(500)
 
+
 def preprocess_text(dataset):
     # Step - a : Remove blank rows if any.
     dataset['text'].dropna(inplace=True)
     # Step - b : Change all the text to lower case. This is required as python interprets 'dog' and 'DOG' differently
     dataset['text'] = [entry.lower() for entry in dataset['text']]
+
     # Step - c : Tokenization : In this each entry in the corpus will be broken into set of words
     dataset['text'] = [word_tokenize(entry) for entry in dataset['text']]
+
     tag_map = defaultdict(lambda: wn.NOUN)
     tag_map['J'] = wn.ADJ
     tag_map['V'] = wn.VERB
@@ -50,9 +53,11 @@ Tfidf_vect.fit(dataset['text_final'])
 Train_X_Tfidf = Tfidf_vect.transform(Train_X)
 Test_X_Tfidf = Tfidf_vect.transform(Test_X)
 
-Naive = naive_bayes.MultinomialNB()
-Naive.fit(Train_X_Tfidf,Train_Y)
+
+SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto')
+SVM.fit(Train_X_Tfidf,Train_Y)
 # predict the labels on validation dataset
-predictions_NB = Naive.predict(Test_X_Tfidf)
+predictions_SVM = SVM.predict(Test_X_Tfidf)
 # Use accuracy_score function to get the accuracy
-print("Naive Bayes Accuracy Score -> ",accuracy_score(predictions_NB, Test_Y)*100)
+print("SVM Accuracy Score -> ",accuracy_score(predictions_SVM, Test_Y)*100)
+
