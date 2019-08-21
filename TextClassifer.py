@@ -10,7 +10,8 @@ from nltk.corpus import wordnet as wn
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import model_selection, naive_bayes, svm
 from sklearn.metrics import accuracy_score
-
+from nltk.classify.scikitlearn import SklearnClassifier
+import pickle
 np.random.seed(500)
 
 
@@ -52,12 +53,10 @@ Tfidf_vect = TfidfVectorizer(max_features=5000)
 Tfidf_vect.fit(dataset['text_final'])
 Train_X_Tfidf = Tfidf_vect.transform(Train_X)
 Test_X_Tfidf = Tfidf_vect.transform(Test_X)
-
-
 SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto')
 SVM.fit(Train_X_Tfidf,Train_Y)
+pickle.dump(SVM, open("classifier.sav", "wb"))
 # predict the labels on validation dataset
 predictions_SVM = SVM.predict(Test_X_Tfidf)
 # Use accuracy_score function to get the accuracy
 print("SVM Accuracy Score -> ",accuracy_score(predictions_SVM, Test_Y)*100)
-
