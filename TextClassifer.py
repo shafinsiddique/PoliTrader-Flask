@@ -10,7 +10,6 @@ from nltk.corpus import wordnet as wn
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import model_selection, naive_bayes, svm
 from sklearn.metrics import accuracy_score
-from nltk.classify.scikitlearn import SklearnClassifier
 import pickle
 np.random.seed(500)
 
