@@ -16,4 +16,3 @@ def get_sentiments(tweets):
     return model.predict(tweets_test)
 
 
-print(get_sentiments(["Hi! i am feeling great today!"]))
