@@ -8,7 +8,13 @@ class Stock(Document):
     meta = {'collection': 'politicians'}
 
 
-stocks = Stock.objects.first()
+
+
+
+stocks = Stock()
+stocks.name = "oweif"
+stocks.prices = []
+stocks.save()
 
 
 
