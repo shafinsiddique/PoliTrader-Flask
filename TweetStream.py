@@ -44,7 +44,7 @@ class Listener(StreamListener):
         self.sentimentscore += get_sentiments([tweet])[0]
         self.count += 1
 
-        if (self.count > 20):
+        if (self.count > 500):
             print("Score: " + str(self.sentimentscore))
             collectionHelper.appendScore(self.currentSubject, datetime.now(),
                                          int(self.sentimentscore))
