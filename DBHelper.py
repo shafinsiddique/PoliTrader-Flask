@@ -1,3 +1,4 @@
+from StockModel import Stock
 class ScoresCollectionHelper:
     def __init__(self, mongocollection):
         self.mongocollection = mongocollection
@@ -14,3 +15,13 @@ class ScoresCollectionHelper:
             subjects.append(document.get("name"))
 
         return subjects
+
+    def getAllStocks(self):
+        cursor = self.mongocollection.find({})
+
+        stocks = []
+        for document in cursor:
+            stocks.append(Stock(document.get("name"), document.get("ticker"),
+                                document.get("scores")))
+
+        return stocks
