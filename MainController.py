@@ -9,6 +9,12 @@ class MainController:
     def getAllStocks(self):
         return self.stocks
 
+    def findStock(self, name):
+        for stocks in self.stocks:
+            if (stocks.name == name):
+                return stocks
+
+
 
 
 

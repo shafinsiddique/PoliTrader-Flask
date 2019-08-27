@@ -9,7 +9,8 @@ class Stock:
 
     def toJson(self):
         return {"name":self.name, "ticker":self.ticker, "prices": self.pricesWD,
-                "currentPrice": self.getCurrentPrice(),"change": self.getChange()}
+                "currentPrice": self.getCurrentPrice(),"change": self.getChange(),
+                "dates":self.dates}
 
     def getCurrentPrice(self):
         if len(self.pricesWD) > 0:
