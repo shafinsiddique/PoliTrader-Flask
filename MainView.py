@@ -18,8 +18,8 @@ def homePage():
 @app.route("/stock/<name>")
 def stockPage(name):
     s = mainController.findStock(name)
-    return render_template("stocksPage.html", labels=[1,2,3,4],
-                           prices = [1,2,3,4],
+    return render_template("stocksPage.html", labels=s.dates,
+                           prices = s.pricesWD,
                            name=s.name)
 
 

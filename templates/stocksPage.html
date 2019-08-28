@@ -5,23 +5,40 @@
     <title>{{name}}</title>
 </head>
 <body>
+
 <canvas id="myChart" width="400" height="150"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script type="text/javascript">
+<script>
+
 
 var ctx = document.getElementById('myChart').getContext('2d');
-var label = ['{{labels}}'];
-var prices = ['{{prices}}'];
+var labels = [];
+
+"{% for label in labels %}"
+
+labels.push("{{label}}");
+
+"{% endfor %}"
+
+var prices = [];
+"{% for price in prices %}"
+
+prices.push("{{price}}");
+
+"{% endfor %}"
+
+
 var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
     // The data for our dataset
     data: {
-        labels:label,
+        labels:labels,
         datasets: [{
-            label: 'History',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            label: 'Price History',
+            fill: false,
+            borderColor: "rgb(30,144,255)",
+            backgroundColor: "rgb(30,144,255)",
             data: prices
         }]
     },
