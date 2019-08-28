@@ -3,7 +3,6 @@ from flask import render_template
 from pymongo import MongoClient
 from DBHelper import ScoresCollectionHelper
 from MainController import MainController
-import json
 app = Flask(__name__)
 
 client = MongoClient("mongodb+srv://shafinsiddique:@politradercluster-zpqob.mongodb.net/test?retryWrites=true&w=majority")
