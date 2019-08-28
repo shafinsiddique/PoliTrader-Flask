@@ -25,3 +25,18 @@ class ScoresCollectionHelper:
                                 document.get("scores")))
 
         return stocks
+
+class UserCollectionHelper:
+    def __init__(self, collection):
+        self.mongocollection = collection
+
+
+    def addUser(self, username, email, password):
+        self.mongocollection.insert_one({"username": username,
+                                         "email": email,
+                                         "password": password,
+                                         "stocks":[],
+                                         "invested":0,
+                                         'balance':100000})
+
+
