@@ -1,4 +1,5 @@
 from User import User
+
 class MainController:
     def __init__(self, priceCollectionHelper, userCollectionHelper):
         self.pricecollectionhelper = priceCollectionHelper
@@ -25,6 +26,12 @@ class MainController:
                     userDict['balance'])
 
         return user
+
+    def purchaseStock(self, user, stockname):
+        stock = self.findStock(stockname)
+        user.buyStock(stock)
+        self.usercollectionhelper.buyStock(user, stock)
+
 
 
 

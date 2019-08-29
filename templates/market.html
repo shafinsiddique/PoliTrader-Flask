@@ -6,18 +6,22 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>{{user.username}} Dashboard</title>
+    <title>PoliTrader</title>
 
     <style>
      .navbar a:hover {
          color: blue;
      }
 
-        .ivstbutton{
-            position: relative;
-            left: 63px;
+        .increase {
+            color: green;
+            font-weight: bold;
         }
 
+        .decrease{
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -33,7 +37,7 @@
                     <a class="nav-link" href="#">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('market') }}">MarketPlace</a>
+                    <a class="nav-link" href="{{ url_for('login') }}">MarketPlace</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('register')}}">LogOut</a>
@@ -58,58 +62,15 @@
           {% block content %}{% endblock %}
         </div>
 <div class="container">
+<h2 class="text-center">MarketPlace</h2>
     <br>
-    <h3 class="text-center">welcome, {{user.username}}!</h3>
-    <br>
-
-    <div class="row">
-    <div class="col-sm-4"></div>
-  <div class="col-sm-4">
-    <div class="card h-100" style="height: 200px">
-        <div class="card-header text-center name">Your Account</div>
-      <div class="card-body">
-                    <p class="card-text text-center">Amount Invested: ${{user.invested}} </p>
-          <br>
-          <p class="card-text text-center">Balance: ${{user.balance}} </p>
-          <br>
-                    <p class="card-text text-center">Profit: {{user.profit}} </p>
-            <br>
-          <p class="card-text text-center">Profit Percent: {{user.profit}} </p>
-
-
-    </div>
-
-</div>
-
-    </div>
-
-
-</div>
-    <div class="row">
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4">
-            <br><br>
-          <button type="button"  class="btn btn-outline-dark btn-lg ivstbutton">View Your Investments</button>
-
-        </div>
-        <div class="col-sm-4">
-        </div>
-    </div>
-
-   <br><br><br><br><br><br><br><br><br>
-    <div id="investments">
-        <h3 class="text-center">Your Investments</h3>
-        <br>
 <table class="table table-hover">
   <thead class="thead">
     <tr>
       <th scope="col">Ticker</th>
       <th scope="col">Name</th>
-      <th scope="col">Purchased Price</th>
       <th scope="col">Current Price</th>
-              <th scope="col">Change %</th>
-
+      <th scope="col">Change %</th>
     </tr>
   </thead>
   <tbody>
@@ -126,17 +87,16 @@
               <td class="decrease">{{stocks.change}}%</td>
 
         {% endif %}
+        <form method="post">
+
+        <td><button type="submit" class="btn btn-dark" name="buy" value="{{ stocks.name }}">Buy</button>
+        </form>
+        </td>
     </tr>
 
   {% endfor %}
 
 </table>
-    </div>
-
-
-</div>
-<br>
-
 
 </div>
 

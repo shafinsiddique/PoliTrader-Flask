@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import redirect
+from flask import request
 from pymongo import MongoClient
 from flask import url_for
 from DBHelper import ScoresCollectionHelper, UserCollectionHelper
@@ -20,6 +21,7 @@ userCollectionHelper = UserCollectionHelper(db.users)
 mainController = MainController(scorecollectionHelper, userCollectionHelper)
 bcrypt = Bcrypt(app)
 user = None
+
 @app.route("/")
 def homePage():
     return render_template("home.html", stocks=mainController.getStocksJson())
@@ -52,7 +54,7 @@ def login():
 
                                               form.password.data):
             global user
-            user = queryUser
+            user = mainController.createUser(queryUser)
             return redirect(url_for('userHome'))
         else:
             flash(f"invalid credentials.","success")
@@ -61,13 +63,26 @@ def login():
     return render_template("login.html", form=form)
 
 @app.route("/home", methods=['GET','POST'])
-
 def userHome():
     if user:
-        return render_template("userHome.html")
+        return render_template("userHome.html", user=user.toJson())
 
     else:
-        return render_template("home.html")
+        return homePage()
+
+
+@app.route("/market", methods=['GET','POST'])
+def market():
+    if user:
+
+        if request.method == "POST":
+            mainController.purchaseStock(user, request.form['buy'])
+
+        return render_template("market.html",
+                               stocks=mainController.getStocksJson())
+    else:
+        return homePage()
+
 
 
 

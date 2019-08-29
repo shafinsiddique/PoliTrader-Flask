@@ -42,3 +42,11 @@ class UserCollectionHelper:
     def findUser(self, username):
         return self.mongocollection.find_one({"username":username})
 
+    def buyStock(self, user, stock):
+        query = {"username":user.username}
+        self.mongocollection.find_one_and_update(query,
+                                                 {"$push":{"stocks":
+                                                        stock.toJson()}})
+
+        self.mongocollection.find_one_and_update(query, {"$set":{"invested":
+                                                        user.invested}})

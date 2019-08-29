@@ -6,5 +6,20 @@ class User:
         self.invested = invested
         self.balance = balance
 
+    def toJson(self):
+        return {"username":self.username,
+                "email": self.email,
+                "stocks":self.stocks,
+                "invested":self.invested,
+                "balance":self.balance,
+                "profit":0}
+
+    def buyStock(self, stock):
+        self.stocks.append(stock.toJson())
+        self.invested += stock.getCurrentPrice()
+
+
+
+
 
 
