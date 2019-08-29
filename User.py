@@ -18,7 +18,12 @@ class User:
         self.stocks.append(stock.toJson())
         self.invested += stock.getCurrentPrice()
 
+    def getPurchasedStocks(self):
+        names  = []
+        for stocks in self.stocks:
+            names.append(stocks['name'])
 
+        return names
 
 
 

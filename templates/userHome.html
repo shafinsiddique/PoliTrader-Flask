@@ -18,6 +18,16 @@
             left: 63px;
         }
 
+           .increase {
+            color: green;
+            font-weight: bold;
+        }
+
+        .decrease{
+            color: red;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -113,22 +123,30 @@
     </tr>
   </thead>
   <tbody>
-  {% for stocks in stocks%}
 
-    <tr>
-      <th scope="row">{{stocks.ticker}}</th>
-        <td><a href="{{url_for('stockPage', name=stocks.name)}}">{{stocks.name}}</a></td>
-      <td>${{stocks.currentPrice}}</td>
-        {% if stocks.change >= 0%}
-      <td class="increase">{{stocks.change}}%</td>
+{% for stocks in investments %}
+  <tr>
+    <th scope="row">{{stocks.ticker}}</th>
+      <td><a href="{{url_for('stockPage', name=stocks.name)}}">{{stocks.name}}</a></td>
+    <td>${{stocks.currentPrice}}</td>
 
-        {% else %}
-              <td class="decrease">{{stocks.change}}%</td>
+    <td>${{originalprices[stocks.name]}}</td>
 
-        {% endif %}
-    </tr>
+      {% if changes[stocks.name] > 0 %}
+          <td class="increase">{{changes[stocks.name]}}%</td>
 
-  {% endfor %}
+      {% else %}
+                <td class="decrease">{{changes[stocks.name]}}%</td>
+
+      {% endif %}
+
+       <td><form><button type="submit" class="btn btn-dark" name="sell" value="{{ stocks.name }}">Sell</button>
+        </form>
+        </td>
+  </tr>
+
+
+{% endfor %}
 
 </table>
     </div>

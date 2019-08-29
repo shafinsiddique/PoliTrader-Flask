@@ -65,7 +65,10 @@ def login():
 @app.route("/home", methods=['GET','POST'])
 def userHome():
     if user:
-        return render_template("userHome.html", user=user.toJson())
+        return render_template("userHome.html", user=user.toJson(),
+                               investments=user.stocks,
+                               originalprices=mainController.getPriceDictionary(),
+                               changes=mainController.getChanges(user.stocks))
 
     else:
         return homePage()

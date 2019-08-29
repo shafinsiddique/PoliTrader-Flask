@@ -32,10 +32,20 @@ class MainController:
         user.buyStock(stock)
         self.usercollectionhelper.buyStock(user, stock)
 
+    def getPriceDictionary(self):
+        stocksPrices = {}
+        for stocks in self.stocks:
+            stocksPrices[stocks.name] = stocks.getCurrentPrice()
 
+        return stocksPrices
 
+    def getChanges(self, userStocks):
+        changesDict = {}
+        priceDict = self.getPriceDictionary()
+        for stocks in userStocks:
+            changesDict[stocks['name']] = round(((priceDict[stocks['name']]-\
+                                          stocks['currentPrice'])/stocks['currentPrice'])*100,2)
 
-
-
+        return changesDict
 
 
