@@ -1,4 +1,6 @@
 from StockModel import Stock
+
+
 class ScoresCollectionHelper:
     def __init__(self, mongocollection):
         self.mongocollection = mongocollection
@@ -25,6 +27,7 @@ class ScoresCollectionHelper:
                                 document.get("scores")))
 
         return stocks
+
 
 class UserCollectionHelper:
     def __init__(self, collection):

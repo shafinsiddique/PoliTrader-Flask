@@ -76,7 +76,11 @@ def market():
     if user:
 
         if request.method == "POST":
-            mainController.purchaseStock(user, request.form['buy'])
+            stockname = request.form['buy']
+            mainController.purchaseStock(user, stockname)
+
+            flash(f"You have successfully purchased a share of {stockname}",
+                  'success')
 
         return render_template("market.html",
                                stocks=mainController.getStocksJson())
