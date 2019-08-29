@@ -5,9 +5,11 @@ from pymongo import MongoClient
 from flask import url_for
 from DBHelper import ScoresCollectionHelper, UserCollectionHelper
 from MainController import MainController
-from forms import RegistrationForm
+from forms import RegistrationForm, LoginForm
 from flask_bcrypt import Bcrypt
+from flask import flash
 import os
+
 app = Flask(__name__)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
@@ -17,6 +19,7 @@ scorecollectionHelper = ScoresCollectionHelper(db.politicians)
 userCollectionHelper = UserCollectionHelper(db.users)
 mainController = MainController(scorecollectionHelper, userCollectionHelper)
 bcrypt = Bcrypt(app)
+user = None
 @app.route("/")
 def homePage():
     return render_template("home.html", stocks=mainController.getStocksJson())
@@ -34,17 +37,37 @@ def register():
         mainController.registerUser(form.username.data, form.email.data,
                                     bcrypt.generate_password_hash(form.password.data).
                                     decode('utf-8'))
+        flash(f'Account created for {form.username.data}', 'success')
 
         return redirect(url_for("login"))
-
 
     return render_template("registration.html", form=form)
 
 @app.route("/login", methods=['GET','POST'])
 def login():
-    return render_template("home.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        queryUser = userCollectionHelper.findUser(form.username.data)
+        if queryUser and bcrypt.check_password_hash(queryUser['password'],
+
+                                              form.password.data):
+            global user
+            user = queryUser
+            return redirect(url_for('userHome'))
+        else:
+            flash(f"invalid credentials.","success")
 
 
+    return render_template("login.html", form=form)
+
+@app.route("/home", methods=['GET','POST'])
+
+def userHome():
+    if user:
+        return render_template("userHome.html")
+
+    else:
+        return render_template("home.html")
 
 
 

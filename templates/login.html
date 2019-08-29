@@ -6,22 +6,21 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>PoliTrader</title>
+    <title>Login Page</title>
 
     <style>
      .navbar a:hover {
          color: blue;
      }
 
-        .increase {
-            color: green;
-            font-weight: bold;
-        }
+        .content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
 
-        .decrease{
-            color: red;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -37,10 +36,10 @@
                     <a class="nav-link" href="#">View Rankings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    <a class="nav-link" href="#">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('register')}}">Register</a>
+                    <a class="nav-link" href="#">Register</a>
                 </li>
             </ul>
         </div>
@@ -62,37 +61,61 @@
           {% block content %}{% endblock %}
         </div>
 <div class="container">
-<h2 class="text-center">Trending Tickers</h2>
-    <br>
-<table class="table table-hover">
-  <thead class="thead">
-    <tr>
-      <th scope="col">Ticker</th>
-      <th scope="col">Name</th>
-      <th scope="col">Current Price</th>
-      <th scope="col">Change %</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for stocks in stocks%}
 
-    <tr>
-      <th scope="row">{{stocks.ticker}}</th>
-        <td><a href="{{url_for('stockPage', name=stocks.name)}}">{{stocks.name}}</a></td>
-      <td>${{stocks.currentPrice}}</td>
-        {% if stocks.change >= 0%}
-      <td class="increase">{{stocks.change}}%</td>
+<div class="content-section">
+    <form method="post" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Register</legend>
+            <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
 
-        {% else %}
-              <td class="decrease">{{stocks.change}}%</td>
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
 
-        {% endif %}
-    </tr>
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                </div>
 
-  {% endfor %}
+                {% else %}
 
-</table>
+                {{ form.username(class="form-control form-control-lg") }}
 
+                {% endif %}
+
+
+            </div>
+
+             <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+
+                  {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+
+                {{ form.password(class="form-control form-control-lg") }}
+
+                {% endif %}
+
+
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info")}}
+            </div>
+
+        </fieldset>
+    </form>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

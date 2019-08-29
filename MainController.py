@@ -1,3 +1,4 @@
+from User import User
 class MainController:
     def __init__(self, priceCollectionHelper, userCollectionHelper):
         self.pricecollectionhelper = priceCollectionHelper
@@ -17,6 +18,13 @@ class MainController:
 
     def registerUser(self, username, email, password):
         self.usercollectionhelper.addUser(username, email, password)
+
+    def createUser(self, userDict):
+        user = User(userDict['username'], userDict['email'],
+                    userDict['stocks'], userDict['invested'],
+                    userDict['balance'])
+
+        return user
 
 
 
