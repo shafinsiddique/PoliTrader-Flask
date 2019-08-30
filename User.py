@@ -25,6 +25,19 @@ class User:
 
         return names
 
+    def sellStock(self, stockname,  purchasedPrice):
+        for x in range(len(self.stocks)):
+            if (self.stocks[x]['name'] == stockname):
+                if (self.stocks[x]['currentPrice'] == int(purchasedPrice)):
+                    self.stocks.pop(x)
+                    break
+
+
+    def addToBalance(self, amount):
+        self.balance += amount
+
+
+
 
 
 

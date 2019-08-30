@@ -53,3 +53,15 @@ class UserCollectionHelper:
 
         self.mongocollection.find_one_and_update(query, {"$set":{"invested":
                                                         user.invested}})
+
+    def sellStock(self, user, stockname, purchasedPrice):
+        query = {'username': user.username}
+
+        self.mongocollection.find_one_and_update(query,
+                                                 {"$pull":{"stocks":
+                                            {"name": stockname,
+
+                                            "currentPrice": int(purchasedPrice)}}})
+
+        self.mongocollection.find_one_and_update(query, {"$set":{"balance": user.balance}})
+

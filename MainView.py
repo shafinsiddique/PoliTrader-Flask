@@ -65,9 +65,18 @@ def login():
 @app.route("/home", methods=['GET','POST'])
 def userHome():
     if user:
+        if request.method == "POST":
+            mainController.sellStock(user, request.form['stockname'],
+                                    request.form['purchasedPrice'])
+
+            flash(f"You have successfully sold a share of "
+                  f"{request.form['stockname']}. Your new balance is "
+                  f"${user.balance}.",'success')
+
+
         return render_template("userHome.html", user=user.toJson(),
                                investments=user.stocks,
-                               originalprices=mainController.getPriceDictionary(),
+                               currentPrices=mainController.getPriceDictionary(),
                                changes=mainController.getChanges(user.stocks))
 
     else:
