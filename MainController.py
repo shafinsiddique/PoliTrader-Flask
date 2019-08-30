@@ -54,5 +54,23 @@ class MainController:
 
         return changesDict
 
+    def getPV(self, user):
+        currentPriceDict = self.getPriceDictionary()
+        portfolioValue = 0
+        for stocks in user.stocks:
+            portfolioValue += currentPriceDict[stocks['name']]
 
+        return portfolioValue
 
+    def getProfit(self, user):
+        return self.getPV(user) - user.invested
+
+    def getProfitPercent(self, user):
+        return round(((self.getPV(user) - user.invested)/user.invested)*100,2)
+    def getUserDict(self, user):
+        userDict = user.toJson()
+        userDict['portfolioValue'] = self.getPV(user)
+        userDict['profit'] = self.getProfit(user)
+        userDict['profitPercent'] = self.getProfitPercent(user)
+
+        return userDict

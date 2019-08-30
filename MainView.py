@@ -74,7 +74,9 @@ def userHome():
                   f"${user.balance}.",'success')
 
 
-        return render_template("userHome.html", user=user.toJson(),
+        userDict = mainController.getUserDict(user)
+
+        return render_template("userHome.html", user=userDict,
                                investments=user.stocks,
                                currentPrices=mainController.getPriceDictionary(),
                                changes=mainController.getChanges(user.stocks))
