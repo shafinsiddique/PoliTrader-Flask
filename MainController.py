@@ -74,3 +74,13 @@ class MainController:
         userDict['profitPercent'] = self.getProfitPercent(user)
 
         return userDict
+
+    def getRankings(self):
+        rankingsDict = {}
+        allUsers = self.usercollectionhelper.getAllUsers()
+
+        for users in allUsers:
+            rankingsDict[users.username] = self.getProfit(users)
+
+        return sorted(rankingsDict.items(), key=lambda x: x[1], reverse=True)
+

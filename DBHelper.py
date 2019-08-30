@@ -1,6 +1,5 @@
 from StockModel import Stock
-
-
+from User import User
 class ScoresCollectionHelper:
     def __init__(self, mongocollection):
         self.mongocollection = mongocollection
@@ -34,6 +33,18 @@ class UserCollectionHelper:
         self.mongocollection = collection
 
 
+    def getAllUsers(self):
+        cursor = self.mongocollection.find({})
+        users = []
+
+        for document in cursor:
+            users.append(User(document.get('username'),
+                              document.get('email'),
+                              document.get('stocks'),
+                              document.get('invested'),
+                              document.get('balance')))
+
+        return users
     def addUser(self, username, email, password):
         self.mongocollection.insert_one({"username": username,
                                          "email": email,

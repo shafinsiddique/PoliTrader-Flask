@@ -101,6 +101,10 @@ def market():
     else:
         return homePage()
 
+@app.route("/rankings")
+def rankings():
+    return render_template("rankings.html", rankings=mainController.getRankings())
+
 
 
 
