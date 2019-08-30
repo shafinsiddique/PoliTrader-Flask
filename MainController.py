@@ -33,8 +33,8 @@ class MainController:
         self.usercollectionhelper.buyStock(user, stock)
 
     def sellStock(self, user, stockname, purchasedPrice):
-        user.sellStock(stockname, purchasedPrice)
-        user.addToBalance(self.getPriceDictionary()[stockname])
+        user.sellStock(stockname, purchasedPrice,
+                       self.getPriceDictionary()[stockname])
         self.usercollectionhelper.sellStock(user, stockname,
                                             purchasedPrice)
 

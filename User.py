@@ -17,7 +17,7 @@ class User:
     def buyStock(self, stock):
         self.stocks.append(stock.toJson())
         self.invested += stock.getCurrentPrice()
-
+        self.balance -= stock.getCurrentPrice()
     def getPurchasedStocks(self):
         names  = []
         for stocks in self.stocks:
@@ -25,17 +25,15 @@ class User:
 
         return names
 
-    def sellStock(self, stockname,  purchasedPrice):
+    def sellStock(self, stockname,  purchasedPrice, currentPrice):
         for x in range(len(self.stocks)):
             if (self.stocks[x]['name'] == stockname):
                 if (self.stocks[x]['currentPrice'] == int(purchasedPrice)):
                     self.stocks.pop(x)
                     break
         self.invested -= purchasedPrice
+        self.balance += currentPrice
 
-
-    def addToBalance(self, amount):
-        self.balance += amount
 
 
 
