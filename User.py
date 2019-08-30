@@ -31,6 +31,7 @@ class User:
                 if (self.stocks[x]['currentPrice'] == int(purchasedPrice)):
                     self.stocks.pop(x)
                     break
+        self.invested -= purchasedPrice
 
 
     def addToBalance(self, amount):
