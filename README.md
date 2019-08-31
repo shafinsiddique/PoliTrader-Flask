@@ -16,7 +16,7 @@ PoliTrader is built using Python's Flask Framework. The sentiment analysis of tw
 ![Rankings](https://user-images.githubusercontent.com/41314351/64060319-dfb29100-cb98-11e9-8c73-6ef37be37ab0.png)
 
 
-
+## Features
 
 
 
