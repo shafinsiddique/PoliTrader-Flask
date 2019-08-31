@@ -8,3 +8,5 @@ The main purpose of this application is to provide young adults with an innovati
 
 PoliTrader is built using Python's Flask Framework. The sentiment analysis of tweets is done by using a text classification model. The model was trained using Sci-Kit Learn and NLTK, Python's natural language processing library.
 
+
+
