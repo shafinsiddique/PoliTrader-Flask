@@ -66,7 +66,11 @@ class MainController:
         return self.getPV(user) - user.invested
 
     def getProfitPercent(self, user):
-        return round(((self.getPV(user) - user.invested)/user.invested)*100,2)
+        if user.invested > 0:
+            return round(((self.getPV(user) - user.invested)/user.invested)*100,2)
+
+        else:
+            return 0
     def getUserDict(self, user):
         userDict = user.toJson()
         userDict['portfolioValue'] = self.getPV(user)

@@ -49,9 +49,9 @@ class UserCollectionHelper:
         self.mongocollection.insert_one({"username": username,
                                          "email": email,
                                          "password": password,
-                                         "stocks":{},
+                                         "stocks":[],
                                          "invested":0,
-                                         'balance':100000})
+                                         'balance':1000})
 
     def findUser(self, username):
         return self.mongocollection.find_one({"username":username})
