@@ -11,7 +11,7 @@ PoliTrader is built using Python's Flask Framework. The sentiment analysis of tw
 ![Tickers Page](https://user-images.githubusercontent.com/41314351/64060302-aaa63e80-cb98-11e9-9a19-2cff4725898d.png)
 ![Stock Chart](https://user-images.githubusercontent.com/41314351/64060303-b72a9700-cb98-11e9-8d51-080517cf4163.png)
 ![Dashboard](https://user-images.githubusercontent.com/41314351/64060513-b6473480-cb9b-11e9-841c-986a626e5627.png)
-![Investments](https://user-images.githubusercontent.com/41314351/64060312-d3c6cf00-cb98-11e9-9e69-070cc629351f.png)
+![Investments](https://user-images.githubusercontent.com/41314351/64182591-751e8100-ce36-11e9-9ecc-de076c07886d.png)
 ![MarketPlace](https://user-images.githubusercontent.com/41314351/64060314-d75a5600-cb98-11e9-957f-4f6bb31ade38.png)
 ![Rankings](https://user-images.githubusercontent.com/41314351/64060319-dfb29100-cb98-11e9-8c73-6ef37be37ab0.png)
 
